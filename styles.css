@@ -132,6 +132,8 @@ input[type="range"]::-webkit-slider-runnable-track {
     body {
         font-size: 16px;
         padding-top: 60px;
+        height: auto; /* 100vh 대신 auto로 설정 */
+        min-height: 100vh; /* 최소 높이는 뷰포트 높이로 */
     }
 
     .container {
@@ -140,17 +142,6 @@ input[type="range"]::-webkit-slider-runnable-track {
         padding: 15px;
         padding-top: 20px; 
     }
-    h1 {
-        position: fixed; /* 제목을 고정 */
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-color: #e0e5ec; /* 또는 body의 배경색과 동일하게 */
-        padding: 10px 0;
-        z-index: 1000;
-        margin: 0;
-    }
-
     #soundButtons {
         padding-top: 20px; /* 버튼 컨테이너에도 상단 여백 추가 */
     }
