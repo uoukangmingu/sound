@@ -1,5 +1,5 @@
 ﻿const sounds = [
-    { name: "1장(1) 라벨 - 밤의 가스파르 '교수대'", file: "1장(1) 라벨 - 밤의 가스파르 '교수대'.mp3" },
+    { name: "1장(1) 라벨 - '교수대'", file: "1장(1) 라벨 - 밤의 가스파르 '교수대'.mp3" },
     { name: "1장(2) 나레이션, 배경", file: "1장(2) 나레이션, 배경.mp3" },
     { name: "1장(3,4) M,계향_1", file: "1장(3,4) M,계향_1.mp3" },
     { name: "1장(5) 암전", file: "1장(5) 암전.mp3" },
@@ -93,5 +93,17 @@ sounds.forEach((sound, index) => {
             <span class="volume-display">100</span>
         </div>
     `;
-    soundButtons.appendChild(button);
+    document.querySelector('.container').appendChild(button);
 });
+function addTouchSupport() {
+    const buttons = document.querySelectorAll('.play-button');
+    buttons.forEach(button => {
+        button.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            this.click();
+        });
+    });
+}
+
+// 모든 버튼이 생성된 후에 이 함수를 호출해야 해
+addTouchSupport();
