@@ -225,8 +225,9 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
 
     .play-button {
-        background: #1e1e1e;
+        background: #2a2a2a;  /* 약간 밝은 배경색 */
         box-shadow: 3px 3px 6px #0d0d0d, -3px -3px 6px #2f2f2f;
+        color: #4CAF50;  /* 재생 아이콘 색상을 녹색으로 변경 */
     }
 
     .play-button:active {
@@ -234,7 +235,13 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
 
     .play-button.playing {
-        background: #2e7d32;
+        background: #2e7d32;  /* 재생 중일 때의 배경색을 더 선명한 녹색으로 */
+        color: #ffffff;  /* 재생 중일 때 아이콘 색상을 흰색으로 */
+    }
+
+    /* 호버 효과 추가 */
+    .play-button:hover {
+        background: #3a3a3a;
     }
 
     input[type="range"]::-webkit-slider-thumb {
@@ -242,10 +249,11 @@ input[type="range"]::-webkit-slider-runnable-track {
     }
 
     input[type="range"]::-webkit-slider-runnable-track {
-        background: #1e1e1e;
+        background: #2a2a2a;
         box-shadow: inset 2px 2px 5px #0d0d0d, inset -2px -2px 5px #2f2f2f;
     }
 }
+
 
 /* 추가: 포커스 상태에 대한 스타일 */
 .play-button:focus,
