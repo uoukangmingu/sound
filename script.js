@@ -20,7 +20,7 @@ const soundButtons = document.getElementById('soundButtons');
 
 const audioElements = sounds.map(sound => {
     const audio = new Audio(sound.file);
-    audio.loop = true;
+    audio.loop = false;
     return audio;
 });
 
