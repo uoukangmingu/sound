@@ -9,12 +9,24 @@
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
+
+h1 {
+    grid-column: 1 / -1;  /* 이 줄을 추가 */
+    text-align: center;   /* 이 줄을 추가 */
+    margin-bottom: 20px;  /* 이 줄을 추가 */
+}
+
+#soundButtons {
+    display: contents;  /* 이 줄을 추가 */
+}
+
 
 .sound-button {
     display: flex;
@@ -24,7 +36,48 @@
     border-radius: 10px;
     background: #e0e5ec;
     box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+    width: 100%;
 }
+
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 모바일 크기 */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 가로 모드 */
+@media (max-width: 900px) and (orientation: landscape) {
+    .container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .sound-button {
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    .sound-name {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 768px) {
+    .play-button {
+        width: 40px;
+        height: 40px;
+    }
+}
+
 
 .play-button {
     width: 50px;
