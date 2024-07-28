@@ -69,18 +69,24 @@ function formatTime(time) {
 }
 
 function changeVolume(index, volume) {
-    audioElements[index].volume = volume;
+    const normalizedVolume = volume / 100;  // 0-100 값을 0-1 범위로 정규화
+    audioElements[index].volume = normalizedVolume;
     const volumeDisplay = document.querySelectorAll('.volume-display')[index];
-    volumeDisplay.textContent = Math.round(volume * 100);
+    volumeDisplay.textContent = Math.round(volume);  // 반올림된 정수 값 표시
 }
 
 sounds.forEach((sound, index) => {
     const button = document.createElement('div');
     button.className = 'sound-button';
     button.innerHTML = `
-        <button class="play-button" onclick="toggleSound(${index})">
-            <i class="fas fa-play"></i>
-        </button>
+        <div class="button-group">
+            <button class="play-button" onclick="toggleSound(${index})">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="refresh-button" onclick="refreshSound(${index})">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
         <div class="sound-info">
             <span class="sound-name">${sound.name}</span>
             <div class="timeline">
@@ -89,12 +95,13 @@ sounds.forEach((sound, index) => {
             </div>
         </div>
         <div class="volume-control">
-            <input type="range" min="0" max="1" step="0.1" value="1" oninput="changeVolume(${index}, this.value)">
+            <input type="range" min="0" max="100" step="1" value="100" oninput="changeVolume(${index}, this.value)">
             <span class="volume-display">100</span>
         </div>
     `;
     document.querySelector('.container').appendChild(button);
 });
+
 function addTouchSupport() {
     const buttons = document.querySelectorAll('.play-button');
     buttons.forEach(button => {
@@ -107,3 +114,36 @@ function addTouchSupport() {
 
 // 모든 버튼이 생성된 후에 이 함수를 호출해야 해
 addTouchSupport();
+
+
+// 다크모드 전환 함수
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+}
+
+// 페이지 로드 시 다크모드 상태 확인
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+});
+
+// 단축키 이벤트 리스너
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key === 'b') {
+        e.preventDefault();
+        toggleDarkMode();
+    }
+});
+
+// 새로고침 함수
+function refreshSound(index) {
+    const audio = audioElements[index];
+    audio.currentTime = 0;
+    if (!audio.paused) {
+        audio.pause();
+        audio.play();
+    }
+    updateTimeline(index);
+}

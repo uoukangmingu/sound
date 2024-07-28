@@ -272,3 +272,52 @@ input[type="range"]:focus {
 .play-button.playing {
     animation: pulse 2s infinite;
 }
+
+.button-group {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.refresh-button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    background: #e0e5ec;
+    box-shadow: 3px 3px 6px #bebebe, -3px -3px 6px #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 0.8em;
+}
+
+.refresh-button:active {
+    box-shadow: inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff;
+}
+
+/* 다크모드 스타일 */
+.dark-mode .refresh-button {
+    background: #2a2a2a;
+    box-shadow: 3px 3px 6px #0d0d0d, -3px -3px 6px #2f2f2f;
+    color: #4CAF50;
+}
+
+.dark-mode .refresh-button:active {
+    box-shadow: inset 3px 3px 6px #0d0d0d, inset -3px -3px 6px #2f2f2f;
+}
+
+@media (max-width: 768px) {
+    .button-group {
+        margin-bottom: 15px;
+    }
+
+    .refresh-button {
+        width: 40px;
+        height: 40px;
+        font-size: 1em;
+    }
+}
+
