@@ -116,11 +116,16 @@ function addTouchSupport() {
 addTouchSupport();
 
 
-// 다크모드 전환 함수
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
     localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    
+    // 다크모드 상태에 따라 메타 태그의 theme-color 변경
+    const metaThemeColor = document.body.classList.contains('dark-mode') ? '#121212' : '#ffffff';
+    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+    themeColorMeta.setAttribute('content', metaThemeColor);
 }
+
 
 // 페이지 로드 시 다크모드 상태 확인
 document.addEventListener('DOMContentLoaded', () => {

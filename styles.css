@@ -320,4 +320,50 @@ input[type="range"]:focus {
         font-size: 1em;
     }
 }
+/* 다크모드 스타일 */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode .container {
+    background-color: #121212;
+}
+
+body.dark-mode .sound-button {
+    background: #1e1e1e;
+    box-shadow: 5px 5px 10px #0d0d0d, -5px -5px 10px #2f2f2f;
+}
+
+body.dark-mode .play-button,
+body.dark-mode .refresh-button {
+    background: #2a2a2a;
+    box-shadow: 3px 3px 6px #0d0d0d, -3px -3px 6px #2f2f2f;
+    color: #4CAF50;
+}
+
+body.dark-mode .play-button:active,
+body.dark-mode .refresh-button:active {
+    box-shadow: inset 3px 3px 6px #0d0d0d, inset -3px -3px 6px #2f2f2f;
+}
+
+body.dark-mode .play-button.playing {
+    background: #2e7d32;
+    color: #ffffff;
+}
+
+body.dark-mode input[type="range"]::-webkit-slider-thumb {
+    background: #4CAF50;
+}
+
+body.dark-mode input[type="range"]::-webkit-slider-runnable-track {
+    background: #2a2a2a;
+    box-shadow: inset 2px 2px 5px #0d0d0d, inset -2px -2px 5px #2f2f2f;
+}
+
+body.dark-mode .sound-name,
+body.dark-mode .time-display,
+body.dark-mode .volume-display {
+    color: #e0e0e0;
+}
 
