@@ -367,3 +367,43 @@ body.dark-mode .volume-display {
     color: #e0e0e0;
 }
 
+.add-mark-button {
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50%;
+    background: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.timeline-container {
+    position: relative;
+    width: 71%;
+    margin-top: 10px;
+
+}
+
+.timeline-marks {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    right: 0;
+    height: 10px;
+}
+
+.timeline-mark {
+    position: absolute;
+    width: 5px;
+    height: 10px;
+    background-color: #ff0000;
+    border-radius: 100%;
+    cursor: pointer;
+    transform: translateX(-50%);
+}
+
+.timeline {
+    position: relative;
+}

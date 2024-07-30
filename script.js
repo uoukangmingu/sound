@@ -89,9 +89,13 @@ sounds.forEach((sound, index) => {
         </div>
         <div class="sound-info">
             <span class="sound-name">${sound.name}</span>
+    <div class="timeline-container">
+        <div class="timeline-marks"></div>
             <div class="timeline">
                 <input type="range" min="0" max="100" value="0" class="timeline-slider">
+            </div>
                 <span class="time-display">0:00 / 0:00</span>
+                <button class="add-mark-button">+</button>
             </div>
         </div>
         <div class="volume-control">
@@ -152,3 +156,65 @@ function refreshSound(index) {
     }
     updateTimeline(index);
 }
+
+function addMark(index) {
+    const audio = audioElements[index];
+    const marksContainer = document.querySelectorAll('.timeline-marks')[index];
+    const currentTime = audio.currentTime;
+    const duration = audio.duration;
+    const percentage = (currentTime / duration) * 100;
+
+    const mark = document.createElement('div');
+    mark.className = 'timeline-mark';
+    mark.style.left = `${percentage}%`;
+
+    mark.addEventListener('click', (e) => {
+        e.stopPropagation();
+        removeMark(index, mark);
+    });
+    marksContainer.appendChild(mark);
+
+    // 마크 정보 저장
+    const marks = JSON.parse(localStorage.getItem(`marks-${index}`)) || [];
+    marks.push({time: currentTime, position: percentage});
+    localStorage.setItem(`marks-${index}`, JSON.stringify(marks));
+}
+
+function removeMark(index, markElement) {
+    const marksContainer = document.querySelectorAll('.timeline-marks')[index];
+    marksContainer.removeChild(markElement);
+
+    // 저장된 마크 정보에서도 제거
+    const marks = JSON.parse(localStorage.getItem(`marks-${index}`)) || [];
+    const position = parseFloat(markElement.style.left);
+    const updatedMarks = marks.filter(mark => Math.abs(mark.position - position) > 0.1);
+    localStorage.setItem(`marks-${index}`, JSON.stringify(updatedMarks));
+}
+
+function loadMarks(index) {
+    const marksContainer = document.querySelectorAll('.timeline-marks')[index];
+    const marks = JSON.parse(localStorage.getItem(`marks-${index}`)) || [];
+    
+    marks.forEach(mark => {
+        const markElement = document.createElement('div');
+        markElement.className = 'timeline-mark';
+        markElement.style.left = `${mark.position}%`;
+        markElement.addEventListener('click', (e) => {
+            e.stopPropagation();
+            removeMark(index, markElement);
+        });
+        marksContainer.appendChild(markElement);
+    });
+}
+
+// 페이지 로드 시 저장된 마크 불러오기
+document.addEventListener('DOMContentLoaded', () => {
+    audioElements.forEach((_, index) => {
+        loadMarks(index);
+    });
+
+    // 마크 추가 버튼에 이벤트 리스너 연결
+    document.querySelectorAll('.add-mark-button').forEach((button, index) => {
+        button.addEventListener('click', () => addMark(index));
+    });
+});
